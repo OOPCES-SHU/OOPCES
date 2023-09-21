@@ -1,7 +1,9 @@
-#include <iostream>
 
+
+#include <bits/stdc++.h>
+#include "LinkList.h"
+#include "Node.h"
 int main() {
     std::cout << "atest!" << std::endl;
-    qqq;
     return 0;
 }
