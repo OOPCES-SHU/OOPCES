@@ -1,5 +1,4 @@
-
-
+//LinkList.cpp
 #include "LinkList.h"
 #include <fstream>
 #include <cstdlib>
