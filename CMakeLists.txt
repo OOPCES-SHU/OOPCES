@@ -8,4 +8,6 @@ add_executable(OOPCES main.cpp
         LinkList.h
         Node.h
         HousePrice.cpp
-        HousePrice.h)
+        HousePrice.h
+        TestHousePrice.cpp
+)
