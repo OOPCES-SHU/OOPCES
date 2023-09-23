@@ -1,9 +1,49 @@
 //HousePrice.cpp
 #include "HousePrice.h"
 
+// 使用字符分割
+//字符串分割函数,分割结果放在一个 vector<string >中
+void Stringsplit(const std::string& str, const char split, std::vector<std::string>& res)
+{
+    if (str == "")		return;
+    //在字符串末尾也加入分隔符，方便截取最后一段
+    std::string strs = str + split;
+    size_t pos = strs.find(split);
+
+    // 若找不到内容则字符串搜索函数返回 npos
+    while (pos != strs.npos)
+    {
+        std::string temp = strs.substr(0, pos);
+        res.push_back(temp);
+        //去掉已分割的字符串,在剩下的字符串中进行分割
+        strs = strs.substr(pos + 1, strs.size());
+        pos = strs.find(split);
+    }
+}
+//
+void Stringsplit(const std::string& str, const std::string& splits, std::vector<std::string>& res)
+{
+    if (str == "")		return;
+    //在字符串末尾也加入分隔符，方便截取最后一段
+    std::string strs = str + splits;
+    size_t pos = strs.find(splits);
+    int step = splits.size();
+
+    // 若找不到内容则字符串搜索函数返回 npos
+    while (pos != strs.npos)
+    {
+        std::string temp = strs.substr(0, pos);
+        res.push_back(temp);
+        //去掉已分割的字符串,在剩下的字符串中进行分割
+        strs = strs.substr(pos + step, strs.size());
+        pos = strs.find(splits);
+    }
+}
+
+
 // 初始化构造函数
 HousePrice::HousePrice() //构造函数，用于初始化数据成员
-    :AllDataStr({'\0'}) //构造只有1个元素’\0‘即AllDataStr = '\0'
+    :AllDataStr({'\0'}),AllDataVec(1,{'\0'}) //构造只有1个元素’\0‘即AllDataStr = '\0'
 {}
 
 
@@ -27,9 +67,11 @@ void HousePrice::Set(const std::string&  str) //设置数据成员的值，使�
     Modify();
 }
 
-void HousePrice::Show() const
+void HousePrice::Show(int n) const
 {
-    std::cout << AllDataStr;
+    if( n == -1)
+        std::cout << AllDataStr;
+    else std::cout << AllDataStr.at(n);
 }
 //数据顺序按索引升序为户型-房间	户型-厅	户型-卫生	建筑面积	朝向	电梯	总楼层 所处层数	小区	地址	建筑时间	价格（万）
 void HousePrice::Modify()
@@ -42,6 +84,19 @@ void HousePrice::Modify()
             AllDataStr.at(i) = ' ';
         }
     }
+    Stringsplit(AllDataStr , ' ' , AllDataVec);
+    NumRoom = std::stoi(AllDataVec.at(2) , nullptr , 10); //转换为十进制数
+    NumLiving = std::stoi(AllDataVec.at(3) , nullptr , 10); //转换为十进制数
+    NumWC = std::stoi(AllDataVec.at(4) , nullptr , 10); //转换为十进制数
+    area = std::stod(AllDataVec.at(5) , nullptr); //转换为double
+    direction = AllDataVec.at(6);
+    escalator = (AllDataVec.at(7) == "有") ? true : false;
+    stories = std::stoi(AllDataVec.at(8) , nullptr , 10); //转换为十进制数
+    floor = AllDataVec.at(9);
+    district = AllDataVec.at(10);
+    adress = AllDataVec.at(11);
+    MadeTime = std::stoi(AllDataVec.at(12) , nullptr , 10); //转换为十进制数
+    price = std::stoi(AllDataVec.at(13) , nullptr , 10); //转换为十进制数
 }
 
 std::ostream & operator<<(std::ostream &out ,const HousePrice &housePrice)
@@ -51,15 +106,4 @@ std::ostream & operator<<(std::ostream &out ,const HousePrice &housePrice)
 }
 /*
 
-NumRoom = std::stoi(AllDataStr.at(0) , nullptr , 10); //转换为十进制数
-NumLiving = std::stoi(AllDataStr.at(1) , nullptr , 10); //转换为十进制数
-NumWC = std::stoi(AllDataStr.at(2) , nullptr , 10); //转换为十进制数
-area = std::stod(AllDataStr.at(3) , nullptr); //转换为double
-direction = AllDataStr.at(4);
-escalator = bool(std::stoi(AllDataStr.at(5) , nullptr , 10)); //强制转换为bool
-stories = std::stoi(AllDataStr.at(6) , nullptr , 10); //转换为十进制数
-floor = AllDataStr.at(7);
-district = AllDataStr.at(8);
-adress = AllDataStr.at(9);
-MadeTime = std::stoi(AllDataStr.at(10) , nullptr , 10); //转换为十进制数
-price = std::stoi(AllDataStr.at(11) , nullptr , 10); //转换为十进制数*/
+*/
