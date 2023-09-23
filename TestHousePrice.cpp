@@ -6,6 +6,7 @@
 // 应包括增删改查、排序、界面打印功能.
 // 界面打印功能也可使用另外一个函数
 
+
 void TestHousePrice()
 {
     LinkList<HousePrice > HosLink; //房子链表
@@ -22,7 +23,6 @@ void TestHousePrice()
         while(std::getline(fin,buf)) // 读入buf
         {
             HosObj.Set(buf+'\n');
-//            HosObj.Show();
             HosLink.Append(HosObj); //插入链表
         }
         HosLink.ShowList(); //打印链表
