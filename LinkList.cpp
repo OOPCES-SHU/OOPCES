@@ -3,6 +3,7 @@
 #include "LinkList.h"
 #include <fstream>
 #include <cstdlib>
+
 template <typename T>
 LinkList<T>::LinkList(int n, const T *array) : head(nullptr),num(0)	// 构造函数（含默认的构造函数、转换构造函数等）
 {

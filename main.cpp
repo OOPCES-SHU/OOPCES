@@ -7,5 +7,8 @@
 
 int main()
 {
-//    void TestHousePrice(); 声明函数
+    system("chcp 65001");
+    void TestHousePrice(); //声明函数
+    TestHousePrice();
+    system("pause");
 }
