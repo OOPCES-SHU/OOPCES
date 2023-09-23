@@ -8,7 +8,6 @@ class HousePrice
 public:
     //添加默认构造函数
     HousePrice(); //构造函数，用于初始化数据成员
-    HousePrice(const HousePrice &housePrice); //拷贝构造函数
     HousePrice & operator=(const HousePrice &housePrice); //重载=运算符
     void Set(const std::string&  str); //设置数据成员的值，使用一个str
     // 重载<< 输出

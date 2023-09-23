@@ -6,10 +6,7 @@ HousePrice::HousePrice() //构造函数，用于初始化数据成员
     :AllDataStr({'\0'}) //构造只有1个元素’\0‘即AllDataStr = '\0'
 {}
 
-// 拷贝构造函数
-HousePrice::HousePrice(const HousePrice &housePrice) //拷贝构造函数
-    :AllDataStr(housePrice.AllDataStr) //拷贝AllDataStr
-{}
+
 
 // 重载=运算符
 HousePrice & HousePrice::operator=(const HousePrice &housePrice) //重载=运算符
