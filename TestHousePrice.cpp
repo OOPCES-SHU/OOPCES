@@ -1,4 +1,4 @@
-//TestHousePrice.cpp
+
 #include "HousePrice.h"
 #include "LinkList.h"
 
