@@ -1,11 +1,34 @@
-
 #include "LinkList.h"
 #include "Tantanic.h"
 #include <fstream>
 #include <bits/stdc++.h>
 
+//增删该查
 
 
+void TestAppend(LinkList<Tantanic > &tan)
+{
+    Tantanic TanObj;
+    std::string buf;
+    std::cout << "请输入要添加的数据，以回车结束:\n";
+    std::cout << "输入顺序为PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Embarked\n";
+    std::cout << "输入顺序为乘客id,是否存活,乘客等级,乘客姓名,乘客性别,年龄,同代直系亲属数量,不同代直系亲属数量,票的类型,费用,几号港口\n";
+    std::cout << "[每个数据之间用逗号隔开]\n[其中1代表存活,0代表死亡,1代表女性,0代表男性,0,1,2分别代表S,C,Q港口]\n";
+    std::getline(std::cin, buf);
+    TanObj.Set(buf+'\n');
+    tan.Append(TanObj);
+    std::cout << "添加成功\n";
+}
+
+void TestDelet(LinkList<Tantanic > &tan)
+{
+    int PassemgerId;
+    std::cout << "请输入要删除的数据的PassengerId:";
+    std::cin >> PassemgerId;
+    tan.Go(PassemgerId);
+    tan.DeleteCurNode();
+    std::cout << "删除成功\n" << std::endl;
+}
 
 //PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Embarked
 void TantanicTest()
@@ -17,11 +40,72 @@ void TantanicTest()
     if(!fin) std::cerr << "File not found!" << std::endl;
     else
     {
-        while (std::getline(fin, buf)) {
+        while (std::getline(fin, buf))
+        {
             TanObj.Set(buf+'\n');
             TanList.Append(TanObj);
         }
-        TanList.ShowList();
     }
+    short CountPrint{0}; //计数器
+    /*
+     * 用计数器做翻页，主要是调整i的值
+     */
+    bool flag{false}; //标记是否退出
+    while(!flag)
+    {
+        std::cout << "============================泰坦尼克号数据管理系统========================\n";
+        std::cout << "                             【尊重死者R.I.P】                         \n";
+        //输出前五个数据
+        for(int i=CountPrint; i<5+CountPrint ; ++i)
+        {
+            TanList.Go(i);
+            std::cout << TanList.CurData() << '\n';
+        }
+        std::cout << "============================泰坦尼克号数据系统========================\n";
+        std::cout << "请输入要进行的操作:\n";
+        std::cout << "输出所有数据[s]    "; //show //每个选项后面四个空格
+        std::cout << "添加新的数据[a]    "; //add
+        std::cout << "删除数据[d]    ";//delete
+        std::cout << "查找数据[f]    ";//find
+        std::cout << "退出系统[q]\n";//quit
+        char choice;
+        std::cin >> choice;
+        switch(choice)
+        {
+            case 's':
+                TanList.ShowList();
+                std::cout << "等待下一次输入.......按任意键继续\n";
+                system("pause");
+                break;
+            case 'a':
+                TestAppend(TanList);
+                std::cout << "等待下一次输入.......按任意键继续\n";
+                system("pause");
+                break;
+            case 'd':
+                TestDelet(TanList);
+                std::cout << "等待下一次输入.......按任意键继续\n";
+                system("pause");
+                break;
+            case 'f':
+                std::cout << "请输入要查找的数据的PassengerId:";
+                int PassengerId;
+                std::cin >> PassengerId;
+                TanList.Go(PassengerId);
+                std::cout << '\n' << TanList.CurData() << '\n';
+                std::cout << "等待下一次输入.......按任意键继续\n";
+                system("pause");
+                break;
+            case 'q':
+                flag = true;
+                break;
+            default:
+                std::cout << "输入错误，请重新输入\n";
+                break;
+        }
+    }
+//    TestAppend(TanList);
+//    TanList.ShowList();
+    fin.close();
     system("pause");
 }
