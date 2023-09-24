@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(OOPCES main.cpp
         LinkList.h
         Node.h
-        HousePrice.cpp
-        HousePrice.h
-        TestHousePrice.cpp
+        Tantanic.cpp
+        Tantanic.h
+        TantanicTest.cpp
 )

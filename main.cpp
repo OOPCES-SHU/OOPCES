@@ -7,8 +7,8 @@ using namespace std;
 int main()
 {
     system("chcp 65001"); // utf-8输出
-    void TestHousePrice(); //声明函数
-    TestHousePrice(); //调用函数
+    void TantanicTest(); //声明函数
+    TantanicTest(); //调用函数
 //    int choice;
 //    while(true)
 //    {
