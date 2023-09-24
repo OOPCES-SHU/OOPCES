@@ -11,17 +11,17 @@ public:
     void Set(const std::string &str);
     friend std::ostream &operator<<(std::ostream &os, const Tantanic &tan);
 private:
-    unsigned int PassengerId;
+    int PassengerId;
     bool Survived;
-    unsigned int Pclass;
+    int Pclass;
     std::string Name;
     bool Sex;
-    unsigned int Age;
-    unsigned int SibSp;
-    unsigned int Parch;
+    int Age;
+    int SibSp;
+    int Parch;
     std::string Ticket;
     double Fare;
-    unsigned int Embarked;
+    int Embarked;
     std::string AllDataStr;
     std::vector<std::string> AllDataVec;
 };

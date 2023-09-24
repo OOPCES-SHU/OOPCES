@@ -55,14 +55,14 @@ build CMakeFiles/OOPCES.dir/main.cpp.obj: CXX_COMPILER__OOPCES_unscanned_Debug D
   OBJECT_DIR = CMakeFiles\OOPCES.dir
   OBJECT_FILE_DIR = CMakeFiles\OOPCES.dir
 
-build CMakeFiles/OOPCES.dir/HousePrice.cpp.obj: CXX_COMPILER__OOPCES_unscanned_Debug D$:/CLionCodeField/OOP/OOPCES/HousePrice.cpp || cmake_object_order_depends_target_OOPCES
-  DEP_FILE = CMakeFiles\OOPCES.dir\HousePrice.cpp.obj.d
+build CMakeFiles/OOPCES.dir/Tantanic.cpp.obj: CXX_COMPILER__OOPCES_unscanned_Debug D$:/CLionCodeField/OOP/OOPCES/Tantanic.cpp || cmake_object_order_depends_target_OOPCES
+  DEP_FILE = CMakeFiles\OOPCES.dir\Tantanic.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\OOPCES.dir
   OBJECT_FILE_DIR = CMakeFiles\OOPCES.dir
 
-build CMakeFiles/OOPCES.dir/TestHousePrice.cpp.obj: CXX_COMPILER__OOPCES_unscanned_Debug D$:/CLionCodeField/OOP/OOPCES/TestHousePrice.cpp || cmake_object_order_depends_target_OOPCES
-  DEP_FILE = CMakeFiles\OOPCES.dir\TestHousePrice.cpp.obj.d
+build CMakeFiles/OOPCES.dir/TantanicTest.cpp.obj: CXX_COMPILER__OOPCES_unscanned_Debug D$:/CLionCodeField/OOP/OOPCES/TantanicTest.cpp || cmake_object_order_depends_target_OOPCES
+  DEP_FILE = CMakeFiles\OOPCES.dir\TantanicTest.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\OOPCES.dir
   OBJECT_FILE_DIR = CMakeFiles\OOPCES.dir
@@ -75,7 +75,7 @@ build CMakeFiles/OOPCES.dir/TestHousePrice.cpp.obj: CXX_COMPILER__OOPCES_unscann
 #############################################
 # Link the executable OOPCES.exe
 
-build OOPCES.exe: CXX_EXECUTABLE_LINKER__OOPCES_Debug CMakeFiles/OOPCES.dir/main.cpp.obj CMakeFiles/OOPCES.dir/HousePrice.cpp.obj CMakeFiles/OOPCES.dir/TestHousePrice.cpp.obj
+build OOPCES.exe: CXX_EXECUTABLE_LINKER__OOPCES_Debug CMakeFiles/OOPCES.dir/main.cpp.obj CMakeFiles/OOPCES.dir/Tantanic.cpp.obj CMakeFiles/OOPCES.dir/TantanicTest.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\OOPCES.dir
