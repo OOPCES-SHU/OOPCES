@@ -37,6 +37,8 @@ void TantanicTest()
     Tantanic TanObj;
     std::fstream fin("../data_train.csv");
     std::string buf;
+    TanList.currentPage = 1; // 初始化当前页码
+    TanList.pageSize = 5; // 每页显示的数据条数
     if(!fin) std::cerr << "File not found!" << std::endl;
     else
     {
@@ -56,17 +58,15 @@ void TantanicTest()
         std::cout << "============================泰坦尼克号数据管理系统========================\n";
         std::cout << "                             【尊重死者R.I.P】                         \n";
         //输出前五个数据
-        for(int i=CountPrint; i<5+CountPrint ; ++i)
-        {
-            TanList.Go(i);
-            std::cout << TanList.CurData() << '\n';
-        }
+        TanList.displayDataPage();
         std::cout << "============================泰坦尼克号数据系统========================\n";
         std::cout << "请输入要进行的操作:\n";
         std::cout << "输出所有数据[s]    "; //show //每个选项后面四个空格
         std::cout << "添加新的数据[a]    "; //add
         std::cout << "删除数据[d]    ";//delete
         std::cout << "查找数据[f]    ";//find
+        std::cout << "上一页[p]    "; // previous page
+        std::cout << "下一页[n]    "; // next page
         std::cout << "退出系统[q]\n";//quit
         char choice;
         std::cin >> choice;
@@ -96,10 +96,21 @@ void TantanicTest()
                 std::cout << "等待下一次输入.......按任意键继续\n";
                 system("pause");
                 break;
-            case 'q':
-                flag = true;
+            case 'p':
+                if (TanList.currentPage > 1) {
+                    TanList.currentPage--;
+                }
                 break;
-            default:
+            case 'n':
+                int totalPages = (TanList.NumNodes() + TanList.pageSize - 1) / TanList.pageSize;
+                if (TanList.currentPage < totalPages) {
+                    TanList.currentPage++;
+                }
+                break;
+//            case 'q':
+//                flag = true;
+//                break;
+//            default:
                 std::cout << "输入错误，请重新输入\n";
                 break;
         }

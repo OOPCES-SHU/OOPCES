@@ -41,7 +41,10 @@ public:
 
     template <typename TYPE> void Sort(const TYPE &x, bool ascending=true);	// 根据TYPE类型排序（升序或降序）
     void Reverse();								// 链表结点倒置
-
+    // 新增的成员变量和函数
+    int currentPage; // 当前页码
+    int pageSize; // 每页的大小
+    void displayDataPage() const;
 private:
     Node<T> *head, *cur_node;					// 链表首结点地址（指针）、当前结点地址（指针）
     int num;									// 用于记录链表中结点的个数
@@ -424,5 +427,20 @@ void LinkList<T>::Reverse()						// 链表结点倒置
         p->next = head;
         head = p;								// 将卸下的结点插入新链表的首部
     }											// 注意：由于只修改了各结点的next的值，cur_node不变
+}
+template <typename T>
+void LinkList<T>::displayDataPage() const {
+    int startIndex = (currentPage - 1) * pageSize;
+    int endIndex = startIndex + pageSize;
+    Node<T> *current = head;
+    int index = 0;
+
+    while (current != nullptr && index < endIndex) {
+        if (index >= startIndex) {
+            std::cout << current->data << '\n';
+        }
+        current = current->next;
+        index++;
+    }
 }
 #endif //OOPCES_LINKLIST_H
