@@ -41,11 +41,11 @@ void Stringsplit(const std::string& str, const std::string& splits, std::vector<
     }
 }
 
-
+/*PassengerId(0),Survived(true),Pclass(0),Name("unknown"),
+Sex(true),Age(0),SibSp(0),Parch(0),Ticket("unknown"),
+Fare(0),Embarked(0),*/
 Tantanic::Tantanic()
-    :PassengerId(0),Survived(true),Pclass(0),Name("unknown"),
-    Sex(true),Age(0),SibSp(0),Parch(0),Ticket("unknown"),
-    Fare(0),Embarked(0),AllDataStr("unknown"),AllDataVec(0)
+    :AllDataStr("unknown"),AllDataVec(0)
 {
     AllDataVec.reserve(23);
 }
@@ -54,17 +54,17 @@ void Tantanic::Set(const std::string &str)
 {
     AllDataStr = str;
     Stringsplit(AllDataStr, ",", AllDataVec);
-    PassengerId = std::stoi(AllDataVec[0]);
-    Survived = (AllDataVec[1] == "1");
-    Pclass = std::stoi(AllDataVec[2]);
-    Name = AllDataVec[3];
-    Sex = AllDataVec[4] == "1"; //0代表男
-    Age = std::stoi(AllDataVec[5]);
-    SibSp = std::stoi(AllDataVec[6]);
-    Parch = std::stoi(AllDataVec[7]);
-    Ticket = AllDataVec[8];
-    Fare = std::stod(AllDataVec[9]);
-    Embarked = std::stoi(AllDataVec[10]);
+//    PassengerId = std::stoi(AllDataVec[0]);
+//    Survived = (AllDataVec[1] == "1");
+//    Pclass = std::stoi(AllDataVec[2]);
+//    Name = AllDataVec[3];
+//    Sex = AllDataVec[4] == "1"; //0代表男
+//    Age = std::stoi(AllDataVec[5]);
+//    SibSp = std::stoi(AllDataVec[6]);
+//    Parch = std::stoi(AllDataVec[7]);
+//    Ticket = AllDataVec[8];
+//    Fare = std::stod(AllDataVec[9]);
+//    Embarked = std::stoi(AllDataVec[10]);
     AllDataVec.push_back({"id."}); //11
 
     if(AllDataVec.at(1) == "1") //12

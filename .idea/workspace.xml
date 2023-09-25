@@ -20,7 +20,23 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26f04baf-2636-458b-b4de-f9c0a87ee965" name="更改" comment="完成翻页（上下页）功能。&#10;Bug:“退出”无法实现。" />
+    <list default="true" id="26f04baf-2636-458b-b4de-f9c0a87ee965" name="更改" comment="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;cmake-build-debug/.cmake/api/v1/reply/index-2023-09-24T03-28-44-0546.json&#10;#&#9;cmake-build-debug/.cmake/api/v1/reply/target-OOPCES-Debug-496352363cdd598c1b7b.json">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tantanic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Tantanic.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tantanic.h" beforeDir="false" afterPath="$PROJECT_DIR$/Tantanic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TantanicTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TantanicTest.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OOPCES.dir/Tantanic.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OOPCES.dir/Tantanic.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OOPCES.dir/TantanicTest.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OOPCES.dir/TantanicTest.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/OOPCES.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/OOPCES.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,11 +55,6 @@
         <option name="argument" value="--tags" />
         <option name="title" value="All" />
       </GitPushTagMode>
-    </option>
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -80,33 +91,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "titanic__main",
-    "last_opened_file_path": "D:/CLionCodeField/OOP/OOPCES/CMakeLists.txt",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "File.Encoding",
-    "structure.view.defaults.are.configured": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CLionCodeField/OOP/OOPCES/CMakeLists.txt&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OOPCES" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="true" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OOPCES" TARGET_NAME="OOPCES" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OOPCES" RUN_TARGET_NAME="OOPCES">
+    <configuration name="OOPCES" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OOPCES" TARGET_NAME="OOPCES" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OOPCES" RUN_TARGET_NAME="OOPCES">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -138,7 +150,9 @@
       <workItem from="1695485936922" duration="533000" />
       <workItem from="1695486485057" duration="236000" />
       <workItem from="1695520416256" duration="8804000" />
-      <workItem from="1695557892222" duration="7713000" />
+      <workItem from="1695557892222" duration="10985000" />
+      <workItem from="1695600846893" duration="342000" />
+      <workItem from="1695601239935" duration="1316000" />
     </task>
     <task id="LOCAL-00001" summary="delete made by He stu">
       <option name="closed" value="true" />
@@ -292,13 +306,13 @@
       <option name="project" value="LOCAL" />
       <updated>1695565430705</updated>
     </task>
-    <task id="LOCAL-00020" summary="完成翻页（上下页）功能。&#10;Bug:“退出”无法实现。">
+    <task id="LOCAL-00020" summary="剩翻页功能,也可以整点其他活">
       <option name="closed" value="true" />
-      <created>1695569359206</created>
+      <created>1695565743753</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1695569359206</updated>
+      <updated>1695565743753</updated>
     </task>
     <option name="localTasksCounter" value="21" />
     <servers />
@@ -331,6 +345,17 @@
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+        <entry key="Paths">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="file:$PROJECT_DIR$/LinkList.h" />
                 </option>
               </RecentGroup>
             </list>
@@ -389,7 +414,7 @@
     <MESSAGE value="全推了" />
     <MESSAGE value="用Tantanic，现在读取文件都没问题" />
     <MESSAGE value="剩翻页功能,也可以整点其他活" />
-    <MESSAGE value="完成翻页（上下页）功能。&#10;Bug:“退出”无法实现。" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成翻页（上下页）功能。&#10;Bug:“退出”无法实现。" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;cmake-build-debug/.cmake/api/v1/reply/index-2023-09-24T03-28-44-0546.json&#10;#&#9;cmake-build-debug/.cmake/api/v1/reply/target-OOPCES-Debug-496352363cdd598c1b7b.json" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;cmake-build-debug/.cmake/api/v1/reply/index-2023-09-24T03-28-44-0546.json&#10;#&#9;cmake-build-debug/.cmake/api/v1/reply/target-OOPCES-Debug-496352363cdd598c1b7b.json" />
   </component>
 </project>

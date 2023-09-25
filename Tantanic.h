@@ -11,7 +11,7 @@ public:
     void Set(const std::string &str);
     friend std::ostream &operator<<(std::ostream &os, const Tantanic &tan);
 private:
-    int PassengerId;
+    /*int PassengerId;
     bool Survived;
     int Pclass;
     std::string Name;
@@ -21,7 +21,7 @@ private:
     int Parch;
     std::string Ticket;
     double Fare;
-    int Embarked;
+    int Embarked;*/
     std::string AllDataStr;
     std::vector<std::string> AllDataVec;
 };
