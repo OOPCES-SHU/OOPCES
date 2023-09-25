@@ -66,7 +66,7 @@ void TantanicTest()
         std::cout << "上一页[p]    "; // previous page
         std::cout << "下一页[n]    "; // next page
         std::cout << "退出系统[q]\n";//quit
-        char choice;
+        char choice,choice2;
         std::cin >> choice;
         int totalPages = (TanList.NumNodes() + TanList.pageSize - 1) / TanList.pageSize;
         switch(choice)
@@ -87,11 +87,31 @@ void TantanicTest()
                 system("pause");
                 break;
             case 'f':
-                std::cout << "请输入要查找的数据的PassengerId:";
-                int PassengerId;
-                std::cin >> PassengerId;
-                TanList.Go(PassengerId-1);
-                std::cout << '\n' << TanList.CurData() << '\n';
+                std::cout << "请选择查找的方式:\n";
+                std::cout << "[1] 使用PassengerId查找    ";
+                std::cout << "[2] 使用姓名查找    ";
+                std::cout << "[3] 输出所有幸存者    ";
+                std::cout << "[4] 输出所有死者    ";
+                std::cout << "[0] 返回上一级    \n";
+                std::cin >> choice2;
+                switch(choice2)
+                {
+                    case '1':
+                        std::cout << "请输入要查找的PassengerId:";
+                        int PassengerId;
+                        std::cin >> PassengerId;
+                        TanList.Go(PassengerId-1);
+                        std::cout << '\n' << TanList.CurData() << '\n';
+                    case '2':
+                        std::cout << "请输入要查找的姓名:";
+                    case '3':
+                    case '4':
+                    case '0':
+                        break;
+                    default:
+                        std::cout << "输入错误\n";
+                        break;
+                }
                 std::cout << "等待下一次输入.......按任意键继续\n";
                 system("pause");
                 break;
@@ -115,6 +135,5 @@ void TantanicTest()
                 break;
         }
     }
-
     fin.close();
 }
