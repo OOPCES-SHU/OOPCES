@@ -57,7 +57,7 @@ void TantanicTest()
         //输出前五个数据
         TanList.displayDataPage();
 
-        std::cout << "============================泰坦尼克号数据系统========================\n";
+        std::cout << "============================对成员名单进行操作========================\n";
         std::cout << "请输入要进行的操作:\n";
         std::cout << "输出所有数据[s]    "; //show //每个选项后面四个空格
         std::cout << "添加新的数据[a]    "; //add
@@ -68,7 +68,7 @@ void TantanicTest()
         std::cout << "退出系统[q]\n";//quit
         char choice;
         std::cin >> choice;
-        if(choice=='q') flag = true;
+        int totalPages = (TanList.NumNodes() + TanList.pageSize - 1) / TanList.pageSize;
         switch(choice)
         {
             case 's':
@@ -101,17 +101,20 @@ void TantanicTest()
                 }
                 break;
             case 'n':
-                int totalPages = (TanList.NumNodes() + TanList.pageSize - 1) / TanList.pageSize;
                 if (TanList.currentPage < totalPages) {
                     TanList.currentPage++;
                 }
                 break;
-            //default:
+            case 'q':
+                flag = true;
+                break;
+            default:
                 std::cout << "输入错误，请重新输入\n";
+                std::cout << "等待下一次输入.......按任意键继续\n";
+                system("pause");
                 break;
         }
     }
 
     fin.close();
 }
-//1
