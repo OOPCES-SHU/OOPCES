@@ -1,10 +1,11 @@
+//TitanicTest.cpp(TantanicTest.cpp)
+
 #include "LinkList.h"
 #include "Tantanic.h"
 #include <fstream>
 #include <bits/stdc++.h>
 
 //增删该查
-
 
 void TestAppend(LinkList<Tantanic > &tan)
 {
@@ -48,17 +49,14 @@ void TantanicTest()
             TanList.Append(TanObj);
         }
     }
-    short CountPrint{0}; //计数器
-    /*
-     * 用计数器做翻页，主要是调整i的值
-     */
     bool flag{false}; //标记是否退出
     while(!flag)
     {
-        std::cout << "============================泰坦尼克号数据管理系统========================\n";
+        std::cout << "============================泰坦尼克号成员名单========================\n";
         std::cout << "                             【尊重死者R.I.P】                         \n";
         //输出前五个数据
         TanList.displayDataPage();
+
         std::cout << "============================泰坦尼克号数据系统========================\n";
         std::cout << "请输入要进行的操作:\n";
         std::cout << "输出所有数据[s]    "; //show //每个选项后面四个空格
@@ -70,6 +68,7 @@ void TantanicTest()
         std::cout << "退出系统[q]\n";//quit
         char choice;
         std::cin >> choice;
+        if(choice=='q') flag = true;
         switch(choice)
         {
             case 's':
@@ -91,7 +90,7 @@ void TantanicTest()
                 std::cout << "请输入要查找的数据的PassengerId:";
                 int PassengerId;
                 std::cin >> PassengerId;
-                TanList.Go(PassengerId);
+                TanList.Go(PassengerId-1);
                 std::cout << '\n' << TanList.CurData() << '\n';
                 std::cout << "等待下一次输入.......按任意键继续\n";
                 system("pause");
@@ -107,10 +106,7 @@ void TantanicTest()
                     TanList.currentPage++;
                 }
                 break;
-//            case 'q':
-//                flag = true;
-//                break;
-//            default:
+            //default:
                 std::cout << "输入错误，请重新输入\n";
                 break;
         }
@@ -118,5 +114,4 @@ void TantanicTest()
 //    TestAppend(TanList);
 //    TanList.ShowList();
     fin.close();
-    system("pause");
 }
