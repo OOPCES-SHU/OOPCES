@@ -435,6 +435,7 @@ void LinkList<T>::displayDataPage() const {
     Node<T> *current = head;
     int index = 0;
 
+    std::cout << "当前页码：" << currentPage << std::endl;
     while (current != nullptr && index < endIndex) {
         if (index >= startIndex) {
             std::cout << current->data << '\n';
@@ -444,3 +445,4 @@ void LinkList<T>::displayDataPage() const {
     }
 }
 #endif //OOPCES_LINKLIST_H
+//1

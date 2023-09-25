@@ -1,5 +1,4 @@
-
-
+//Titanic.h(Tantanic.h)
 #ifndef OOPCES_TANTANIC_H
 #define OOPCES_TANTANIC_H
 #include <string>
@@ -28,3 +27,4 @@ private:
 
 
 #endif //OOPCES_TANTANIC_H
+//1
