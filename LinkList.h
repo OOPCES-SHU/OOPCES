@@ -23,6 +23,7 @@ public:
     void ShowList() const;						// 输出链表所有结点的数据（另一种格式：在一行中输出）
     void ShowListSurvive() const;                // 根据生存情况输出链表所有结点的数据
     void ShowListDead() const;                // 根据生存情况输出链表所有结点的数据
+    void Search(const std::string &x) const; //根据姓名模糊搜索
 
     Node<T> *Insert(const T &t);				// 插入一个结点成为新的首结点
     Node<T> *InsertBefore(const T &t);			// 在当前结点之前插入一个结点
@@ -464,5 +465,23 @@ void LinkList<T>::ShowListDead() const		// 仅输出死者
         if(p->data.AllDataVec.at(1) == "0")
             std::cout << p->data << '\n';
     }
+}
+template <typename T>
+void LinkList<T>::Search(const std::string &x) const   //根据姓名模糊搜索
+{
+    Node<T> *p;
+    int i = 0;
+    for(p=head; p!=nullptr; p=p->next)
+    {
+        if(p->data.AllDataVec.at(3).find(x) != std::string::npos)
+        {
+            std::cout << p->data << '\n';
+            i++;
+        }
+    }
+    if(i==0)
+        std::cout << "未找到相关信息\n";
+    else
+        std::cout << "共找到" << i << "条相关信息\n";
 }
 #endif //OOPCES_LINKLIST_H

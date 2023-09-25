@@ -38,11 +38,12 @@ void TestFind(char choice2, LinkList<Tantanic > &TanList)
 {
     std::cout << "请选择查找的方式:\n";
     std::cout << "[1] 使用PassengerId查找    ";
-    std::cout << "[2] 使用姓名查找(模糊搜索)    ";
+    std::cout << "[2] 使用姓名查找    ";
     std::cout << "[3] 输出所有死者    ";//对不起对不起对不起RIP,RIP,RIP
     std::cout << "[4] 输出所有幸存者    ";
     std::cout << "[0] 返回上一级    \n";
     std::cin >> choice2;
+    std::string n;
     switch(choice2)
     {
         case '1':
@@ -56,6 +57,11 @@ void TestFind(char choice2, LinkList<Tantanic > &TanList)
             break;
         case '2':
             std::cout << "请输入要查找的姓名:";
+            std::cin >> n;
+            std::cout << "查找结果如下:\n";
+            TanList.Search(n);
+            std::cout << "等待下一次输入.......按任意键继续\n";
+            system("pause");
             break;
         case '3':
             TanList.ShowListDead();
@@ -138,13 +144,23 @@ void TantanicTest()
                 TestFind(choice2, TanList);
                 break;
             case 'p':
-                if (TanList.currentPage > 1) {
+                if (TanList.currentPage > 1)
                     TanList.currentPage--;
+                else if(TanList.currentPage == 1)
+                {
+                    std::cout << "已经是第一页了\n";
+                    std::cout << "等待下一次输入.......按任意键继续\n";
+                    system("pause");
                 }
                 break;
             case 'n':
-                if (TanList.currentPage < totalPages) {
+                if (TanList.currentPage < totalPages)
                     TanList.currentPage++;
+                else if(TanList.currentPage == totalPages)
+                {
+                    std::cout << "已经是最后一页了\n";
+                    std::cout << "等待下一次输入.......按任意键继续\n";
+                    system("pause");
                 }
                 break;
             case 'e':
