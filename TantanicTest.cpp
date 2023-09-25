@@ -11,10 +11,13 @@ void TestAppend(LinkList<Tantanic > &tan)
 {
     Tantanic TanObj;
     std::string buf;
+    //吸取'\n'
+    std::string temp;
     std::cout << "请输入要添加的数据，以回车结束:\n";
     std::cout << "输入顺序为PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Embarked\n";
     std::cout << "输入顺序为乘客id,是否存活,乘客等级,乘客姓名,乘客性别,年龄,同代直系亲属数量,不同代直系亲属数量,票的类型,费用,几号港口\n";
     std::cout << "[每个数据之间用逗号隔开]\n[其中1代表存活,0代表死亡,1代表女性,0代表男性,0,1,2分别代表S,C,Q港口]\n";
+    std::getline(std::cin, temp);
     std::getline(std::cin, buf);
     TanObj.Set(buf+'\n');
     tan.Append(TanObj);
@@ -26,7 +29,7 @@ void TestDelet(LinkList<Tantanic > &tan)
     int PassemgerId;
     std::cout << "请输入要删除的数据的PassengerId:";
     std::cin >> PassemgerId;
-    tan.Go(PassemgerId);
+    tan.Go(PassemgerId-1);
     tan.DeleteCurNode();
     std::cout << "删除成功\n" << std::endl;
 }
