@@ -2,11 +2,12 @@
 #ifndef OOPCES_LINKLIST_H
 #define OOPCES_LINKLIST_H
 
-
+#include "Tantanic.h"
 #include <iostream>
 #include "Node.h"
 #include <fstream>
 #include <cstdlib>
+
 template <typename T> class LinkList			// 单向链表类模板设计
 {
 public:
@@ -20,6 +21,8 @@ public:
     int Save(const char *filename);				// 将链表所有结点的数据写入指定文件
     int Load(const char *filename);				// 从指定文件中读取数据，构造链表
     void ShowList() const;						// 输出链表所有结点的数据（另一种格式：在一行中输出）
+    void ShowListSurvive() const;                // 根据生存情况输出链表所有结点的数据
+    void ShowListDead() const;                // 根据生存情况输出链表所有结点的数据
 
     Node<T> *Insert(const T &t);				// 插入一个结点成为新的首结点
     Node<T> *InsertBefore(const T &t);			// 在当前结点之前插入一个结点
@@ -170,7 +173,6 @@ void LinkList<T>::ShowList() const				// 输出链表所有结点的数据（格
     std::cout << "head";
     for(Node<T> *p=head; p!=nullptr; p=p->next)
         std::cout << (p==cur_node? " ->*" : " -> ") << p->data;
-    std::cout << " -> nullptr" << std::endl;
 }
 
 template <typename T>
@@ -435,7 +437,6 @@ void LinkList<T>::displayDataPage() const {
     Node<T> *current = head;
     int index = 0;
 
-    std::cout << "当前页码：" << currentPage << std::endl;
     while (current != nullptr && index < endIndex) {
         if (index >= startIndex) {
             std::cout << current->data << '\n';
@@ -444,5 +445,24 @@ void LinkList<T>::displayDataPage() const {
         index++;
     }
 }
+template <typename T>
+void LinkList<T>::ShowListSurvive() const		// 输出生者
+{
+    Node<T> *p;
+    for(p=head; p!=nullptr; p=p->next)
+    {
+        if(p->data.AllDataVec.at(1) == "1")
+            std::cout << p->data << '\n';
+    }
+}
+template <typename T>
+void LinkList<T>::ShowListDead() const		// 仅输出死者
+{
+    Node<T> *p;
+    for(p=head; p!=nullptr; p=p->next)
+    {
+        if(p->data.AllDataVec.at(1) == "0")
+            std::cout << p->data << '\n';
+    }
+}
 #endif //OOPCES_LINKLIST_H
-//1

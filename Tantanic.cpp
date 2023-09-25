@@ -2,7 +2,7 @@
 
 #include "Tantanic.h"
 // 使用字符分割
-//字符串分割函数,分割结果放在一个 vector<string >中
+// 字符串分割函数,分割结果放在一个 vector<string >中
 void Stringsplit(const std::string& str, const char split, std::vector<std::string>& res)
 {
     res.clear();
@@ -86,6 +86,7 @@ void Tantanic::Set(const std::string &str)
         AllDataVec.push_back({"\t性别:男"});
     else
         AllDataVec.push_back({"\t性别:女"});
+
     AllDataVec.push_back({"\t年龄:"});//16
     AllDataVec.push_back({"\t同代直系亲属数量:"}); //17
     AllDataVec.push_back({"\t不同代直系亲属数量:"}); //18
@@ -98,6 +99,7 @@ void Tantanic::Set(const std::string &str)
         AllDataVec.push_back({"\t几号港口:C"});
     else
         AllDataVec.push_back({"\t几号港口:Q"});
+
     AllDataVec.push_back({"\n"}); //22
 }
 
@@ -123,4 +125,3 @@ std::ostream &operator<<(std::ostream &os, const Tantanic &tan)
     os << tan.AllDataVec.at(22); //换行
     return os;
 }
-//1

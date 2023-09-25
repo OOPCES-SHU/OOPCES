@@ -20,6 +20,4 @@ private:
     Node<T> *next;						// 指针域
 };
 
-
 #endif //OOPCES_NODE_H
-//1

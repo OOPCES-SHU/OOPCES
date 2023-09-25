@@ -3,12 +3,14 @@
 #define OOPCES_TANTANIC_H
 #include <string>
 #include <vector>
+
 class Tantanic
 {
 public:
     Tantanic();
     void Set(const std::string &str);
     friend std::ostream &operator<<(std::ostream &os, const Tantanic &tan);
+    std::vector<std::string> AllDataVec;
 private:
     /*int PassengerId;
     bool Survived;
@@ -22,9 +24,6 @@ private:
     double Fare;
     int Embarked;*/
     std::string AllDataStr;
-    std::vector<std::string> AllDataVec;
 };
 
-
 #endif //OOPCES_TANTANIC_H
-//1
