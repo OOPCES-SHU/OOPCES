@@ -1,6 +1,7 @@
 //Titanic.cpp(Tantanic.cpp)
 
 #include "Tantanic.h"
+#include <iostream>
 // 使用字符分割
 // 字符串分割函数,分割结果放在一个 vector<string >中
 void Stringsplit(const std::string& str, const char split, std::vector<std::string>& res)
@@ -55,17 +56,17 @@ void Tantanic::Set(const std::string &str)
 {
     AllDataStr = str;
     Stringsplit(AllDataStr, ",", AllDataVec);
-//    PassengerId = std::stoi(AllDataVec[0]);
-//    Survived = (AllDataVec[1] == "1");
-//    Pclass = std::stoi(AllDataVec[2]);
-//    Name = AllDataVec[3];
-//    Sex = AllDataVec[4] == "1"; //0代表男
-//    Age = std::stoi(AllDataVec[5]);
-//    SibSp = std::stoi(AllDataVec[6]);
-//    Parch = std::stoi(AllDataVec[7]);
-//    Ticket = AllDataVec[8];
-//    Fare = std::stod(AllDataVec[9]);
-//    Embarked = std::stoi(AllDataVec[10]);
+    PassengerId = std::stoi(AllDataVec[0]);
+    Survived = (AllDataVec[1] == "1");
+    Pclass = std::stoi(AllDataVec[2]);
+    Name = AllDataVec[3];
+    Sex = AllDataVec[4] == "1"; //0代表男
+    Age = std::stoi(AllDataVec[5]);
+    SibSp = std::stoi(AllDataVec[6]);
+    Parch = std::stoi(AllDataVec[7]);
+    Ticket = AllDataVec[8];
+    Fare = std::stod(AllDataVec[9]);
+    Embarked = std::stoi(AllDataVec[10]);
     AllDataVec.push_back({"id."}); //11
 
     if(AllDataVec.at(1) == "1") //12
@@ -101,6 +102,16 @@ void Tantanic::Set(const std::string &str)
         AllDataVec.push_back({"\t几号港口:Q"});
 
     AllDataVec.push_back({"\n"}); //22
+}
+
+std::string Tantanic::GetName() const
+{
+    return Name;
+}
+
+bool Tantanic::GetSurvived() const
+{
+    return Survived;
 }
 
 std::ostream &operator<<(std::ostream &os, const Tantanic &tan)

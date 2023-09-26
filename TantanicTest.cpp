@@ -7,7 +7,7 @@
 
 //增删该查
 
-void TestAppend(LinkList<Tantanic > &tan)
+static void TestAppend(LinkList<Tantanic > &tan)
 {
     Tantanic TanObj;
     std::string buf;
@@ -24,7 +24,7 @@ void TestAppend(LinkList<Tantanic > &tan)
     std::cout << "添加成功\n";
 }
 
-void TestDelete(LinkList<Tantanic > &tan)
+static void TestDelete(LinkList<Tantanic > &tan)
 {
     int PassengerId;
     std::cout << "请输入要删除的数据的PassengerId:";
@@ -41,7 +41,55 @@ void TestDelete(LinkList<Tantanic > &tan)
     }
 }
 
-void TestFind(char choice2, LinkList<Tantanic > &TanList)
+static void Search(const std::string &x ,LinkList<Tantanic >& tan)   //根据姓名模糊搜索
+{
+    int count = 0; //记录找到的个数
+    int CurNode = tan.CurPos(); //记录当前位置
+    tan.GoTop(); //移动到头结点
+    Tantanic temp; //临时变量
+    temp = tan.CurData(); //获取当前结点的数据
+    for(int i=0; i< tan.NumNodes(); i++)
+    {
+        std::string Name = temp.GetName(); //获取姓名
+        if(Name.find(x) != std::string::npos)
+        {
+            std::cout << temp << '\n';
+            count++;
+        }
+        tan.Go(i); //移动到下一个结点
+        temp = tan.CurData(); //更新temp
+    }
+    tan.Go(CurNode); //恢复原来的位置
+    if(count==0)
+        std::cout << "未找到相关信息\n";
+    else
+        std::cout << "共找到" << count << "条相关信息\n";
+}
+
+static void ShowListDeadOrSur(LinkList<Tantanic >& tan, bool DeadOrSur) //输出所有死者或者幸存者
+{
+    int CurNode = tan.CurPos(); //记录当前位置
+    tan.GoTop(); //移动到头结点
+    Tantanic temp = tan.CurData(); //获取当前结点的数据
+    for(int i=0; i<tan.NumNodes(); i++)
+    {
+        if(!DeadOrSur) //输出死者
+        {
+            if(temp.GetSurvived() == false)
+            std::cout << temp << '\n';
+        }
+        else //输出幸存者
+        {
+            if(temp.GetSurvived() == true)
+            std::cout << temp << '\n';
+        }
+        tan.Go(i); //移动到下一个结点
+        temp = tan.CurData(); //更新temp
+    }
+    tan.Go(CurNode); //恢复原来的位置
+}
+
+static void TestFind(char choice2, LinkList<Tantanic > &TanList)
 {
     std::cout << "请选择查找的方式:\n";
     std::cout << "[1] 使用PassengerId查找    ";
@@ -50,7 +98,7 @@ void TestFind(char choice2, LinkList<Tantanic > &TanList)
     std::cout << "[4] 输出所有幸存者    ";
     std::cout << "[0] 返回上一级    \n";
     std::cin >> choice2;
-    std::string n;
+    std::string name;
     switch(choice2)
     {
         case '1':
@@ -71,19 +119,19 @@ void TestFind(char choice2, LinkList<Tantanic > &TanList)
             }
         case '2':
             std::cout << "请输入要查找的姓名:";
-            std::cin >> n;
+            std::cin >> name;
             std::cout << "查找结果如下:\n";
-            TanList.Search(n);
+            Search(name, TanList);
             std::cout << "等待下一次输入.......按任意键继续\n";
             system("pause");
             break;
         case '3':
-            TanList.ShowListDead();
+            ShowListDeadOrSur(TanList, false);
             std::cout << "等待下一次输入.......按任意键继续\n";
             system("pause");
             break;
         case '4':
-            TanList.ShowListSurvive();
+            ShowListDeadOrSur(TanList, true);
             std::cout << "等待下一次输入.......按任意键继续\n";
             system("pause");
             break;
@@ -104,8 +152,10 @@ void TantanicTest()
     Tantanic TanObj;
     std::fstream fin("../data_train.csv");
     std::string buf;
-    TanList.currentPage = 1; // 初始化当前页码
-    TanList.pageSize = 5; // 每页显示的数据条数
+    TanList.SetCurrentPage(1); // 初始化当前页码
+    TanList.SetPageSize(5); // 每页显示的数据条数
+    int CurPage = TanList.GetCurrentPage();
+    int PageSize = TanList.GetPageSize();
     if(!fin) std::cerr << "File not found!" << std::endl;
     else
     {
@@ -118,11 +168,11 @@ void TantanicTest()
     bool flag{false}; //标记是否退出
     while(!flag)
     {
-        int totalPages = (TanList.NumNodes() + TanList.pageSize - 1) / TanList.pageSize;
+        int totalPages = (TanList.NumNodes() + TanList.GetPageSize() - 1) / TanList.GetPageSize();
         std::cout << "============================泰坦尼克号成员名单========================\n";
         std::cout << "                             【尊重死者R.I.P】                         \n";
         //输出前五个数据
-        std::cout << "[当前页码：" << TanList.currentPage << " / " << totalPages << "]\n";
+        std::cout << "[当前页码：" << TanList.GetCurrentPage() << " / " << totalPages << "]\n";
         TanList.displayDataPage();
 
         std::cout << "============================对成员名单进行操作========================\n";
@@ -158,9 +208,12 @@ void TantanicTest()
                 TestFind(choice2, TanList);
                 break;
             case 'p':
-                if (TanList.currentPage > 1)
-                    TanList.currentPage--;
-                else if(TanList.currentPage == 1)
+                if (CurPage > 1)
+                {
+                    CurPage--;
+                    TanList.SetCurrentPage(CurPage);
+                }
+                else
                 {
                     std::cout << "[已经是第一页了]\n";
                     std::cout << "等待下一次输入.......按任意键继续\n";
@@ -168,9 +221,12 @@ void TantanicTest()
                 }
                 break;
             case 'n':
-                if (TanList.currentPage < totalPages)
-                    TanList.currentPage++;
-                else if(TanList.currentPage == totalPages)
+                if ( CurPage< totalPages)
+                {
+                    CurPage++;
+                    TanList.SetCurrentPage(CurPage);
+                }
+                else if(CurPage == totalPages)
                 {
                     std::cout << "[已经是最后一页了]\n";
                     std::cout << "等待下一次输入.......按任意键继续\n";
@@ -181,7 +237,8 @@ void TantanicTest()
                 int designatedPage;
                 std::cout << "[请输入要跳转到的页面]:" ;
                 std::cin >> designatedPage;
-                TanList.currentPage = designatedPage;
+                CurPage = designatedPage;
+                TanList.SetCurrentPage(CurPage);
                 break;
             case 'q':
                 flag = true;

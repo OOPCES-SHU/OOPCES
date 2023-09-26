@@ -21,9 +21,7 @@ public:
     int Save(const char *filename);				// 将链表所有结点的数据写入指定文件
     int Load(const char *filename);				// 从指定文件中读取数据，构造链表
     void ShowList() const;						// 输出链表所有结点的数据（另一种格式：在一行中输出）
-    void ShowListSurvive() const;                // 根据生存情况输出链表所有结点的数据
-    void ShowListDead() const;                // 根据生存情况输出链表所有结点的数据
-    void Search(const std::string &x) const; //根据姓名模糊搜索
+
 
     Node<T> *Insert(const T &t);				// 插入一个结点成为新的首结点
     Node<T> *InsertBefore(const T &t);			// 在当前结点之前插入一个结点
@@ -45,13 +43,18 @@ public:
 
     template <typename TYPE> void Sort(const TYPE &x, bool ascending=true);	// 根据TYPE类型排序（升序或降序）
     void Reverse();								// 链表结点倒置
-    // 新增的成员变量和函数
-    int currentPage; // 当前页码
-    int pageSize; // 每页的大小
     void displayDataPage() const;
+    void ChangePage(int page);
+    void SetCurrentPage(int page);
+    void SetPageSize(int size);
+    int GetCurrentPage() const;
+    int GetPageSize() const;
 private:
     Node<T> *head, *cur_node;					// 链表首结点地址（指针）、当前结点地址（指针）
     int num;									// 用于记录链表中结点的个数
+    // 新增的成员变量和函数
+    int currentPage; // 当前页码
+    int pageSize; // 每页的大小
 };
 
 
@@ -434,6 +437,7 @@ void LinkList<T>::Reverse()						// 链表结点倒置
         head = p;								// 将卸下的结点插入新链表的首部
     }											// 注意：由于只修改了各结点的next的值，cur_node不变
 }
+
 template <typename T>
 void LinkList<T>::displayDataPage() const {
     int startIndex = (currentPage - 1) * pageSize;
@@ -449,42 +453,36 @@ void LinkList<T>::displayDataPage() const {
         index++;
     }
 }
+
+
 template <typename T>
-void LinkList<T>::ShowListSurvive() const		// 输出生者
+void LinkList<T>::ChangePage(int page)
 {
-    Node<T> *p;
-    for(p=head; p!=nullptr; p=p->next)
-    {
-        if(p->data.AllDataVec.at(1) == "1")
-            std::cout << p->data << '\n';
-    }
+    currentPage = page;
 }
+
 template <typename T>
-void LinkList<T>::ShowListDead() const		// 仅输出死者
+void LinkList<T>::SetCurrentPage(int page)
 {
-    Node<T> *p;
-    for(p=head; p!=nullptr; p=p->next)
-    {
-        if(p->data.AllDataVec.at(1) == "0")
-            std::cout << p->data << '\n';
-    }
+    currentPage = page;
 }
+
 template <typename T>
-void LinkList<T>::Search(const std::string &x) const   //根据姓名模糊搜索
+void LinkList<T>::SetPageSize(int size)
 {
-    Node<T> *p;
-    int i = 0;
-    for(p=head; p!=nullptr; p=p->next)
-    {
-        if(p->data.AllDataVec.at(3).find(x) != std::string::npos)
-        {
-            std::cout << p->data << '\n';
-            i++;
-        }
-    }
-    if(i==0)
-        std::cout << "未找到相关信息\n";
-    else
-        std::cout << "共找到" << i << "条相关信息\n";
+    pageSize = size;
 }
+
+template <typename T>
+int LinkList<T>::GetCurrentPage() const
+{
+    return currentPage;
+}
+
+template <typename T>
+int LinkList<T>::GetPageSize() const
+{
+    return pageSize;
+}
+
 #endif //OOPCES_LINKLIST_H
