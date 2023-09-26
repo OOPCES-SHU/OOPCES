@@ -29,9 +29,16 @@ void TestDelete(LinkList<Tantanic > &tan)
     int PassengerId;
     std::cout << "请输入要删除的数据的PassengerId:";
     std::cin >> PassengerId;
-    tan.Go(PassengerId-1);
-    tan.DeleteCurNode();
-    std::cout << "删除成功\n" << std::endl;
+    if((tan.NumNodes() < PassengerId) || (PassengerId<=0))
+    {
+        std::cout << "输入错误\n";
+        return;
+    }
+    else {
+        tan.Go(PassengerId-1);
+        tan.DeleteCurNode();
+        std::cout << "删除成功\n" << '\n';
+    }
 }
 
 void TestFind(char choice2, LinkList<Tantanic > &TanList)
@@ -50,11 +57,18 @@ void TestFind(char choice2, LinkList<Tantanic > &TanList)
             std::cout << "请输入要查找的PassengerId:";
             int PassengerId;
             std::cin >> PassengerId;
-            TanList.Go(PassengerId-1);
-            std::cout << '\n' << TanList.CurData() << '\n';
-            std::cout << "等待下一次输入.......按任意键继续\n";
-            system("pause");
-            break;
+            if((TanList.NumNodes() < PassengerId) || (PassengerId<=0))
+            {
+                std::cout << "输入错误\n";
+                return;
+            }
+            else {
+                TanList.Go(PassengerId - 1);
+                std::cout << '\n' << TanList.CurData() << '\n';
+                std::cout << "等待下一次输入.......按任意键继续\n";
+                system("pause");
+                break;
+            }
         case '2':
             std::cout << "请输入要查找的姓名:";
             std::cin >> n;
@@ -108,7 +122,7 @@ void TantanicTest()
         std::cout << "============================泰坦尼克号成员名单========================\n";
         std::cout << "                             【尊重死者R.I.P】                         \n";
         //输出前五个数据
-        std::cout << "当前页码：" << TanList.currentPage << " / " << totalPages << std::endl;
+        std::cout << "[当前页码：" << TanList.currentPage << " / " << totalPages << "]\n";
         TanList.displayDataPage();
 
         std::cout << "============================对成员名单进行操作========================\n";
@@ -148,7 +162,7 @@ void TantanicTest()
                     TanList.currentPage--;
                 else if(TanList.currentPage == 1)
                 {
-                    std::cout << "已经是第一页了\n";
+                    std::cout << "[已经是第一页了]\n";
                     std::cout << "等待下一次输入.......按任意键继续\n";
                     system("pause");
                 }
@@ -158,19 +172,21 @@ void TantanicTest()
                     TanList.currentPage++;
                 else if(TanList.currentPage == totalPages)
                 {
-                    std::cout << "已经是最后一页了\n";
+                    std::cout << "[已经是最后一页了]\n";
                     std::cout << "等待下一次输入.......按任意键继续\n";
                     system("pause");
                 }
                 break;
             case 'e':
                 int designatedPage;
-                std::cout << "请输入要跳转到的页面:" ;
+                std::cout << "[请输入要跳转到的页面]:" ;
                 std::cin >> designatedPage;
                 TanList.currentPage = designatedPage;
                 break;
             case 'q':
                 flag = true;
+                std::cout << "退出系统\n";
+                system("pause");
                 break;
             default:
                 std::cout << "输入错误，请重新输入\n";

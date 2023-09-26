@@ -255,7 +255,7 @@ T LinkList<T>::DeleteCurNode() 		// 删除当前结点，其下一个结点（�
     try {
         if (cur_node == nullptr || head == nullptr) throw true;
     }
-    catch(bool) { std::cout <<"[链表为空，无法删除!]\n";}
+    catch(bool) { std::cerr <<"[链表为空，无法删除!]\n";}
     Node<T> *p;
     T x;
     if(cur_node == head)
@@ -321,7 +321,7 @@ T & LinkList<T>::CurData()			// 引用返回当前结点数据域成员，函数
     try{
         if(cur_node == nullptr) throw true;
     }
-    catch (bool) { std::cout << "[链表为空，无法返回数据!]\n"; }
+    catch (bool) { std::cerr << "[链表为空，无法返回数据!]\n"; }
     if(cur_node!=nullptr)
         return cur_node->data;
 }
@@ -336,7 +336,10 @@ template <typename T>
 Node<T> *LinkList<T>::Go(int n)					// 当前结点绝对定位：首结点、第n个结点(n从0起)、尾结点
 {
     if(n<0 || n>num)
-        return cur_node=nullptr;
+    {
+        cur_node = nullptr;
+        return cur_node;
+    }
     int i=0;
     cur_node = head;
     while(cur_node!=nullptr && i<n)
