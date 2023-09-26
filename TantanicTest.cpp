@@ -169,7 +169,7 @@ void TantanicTest()
     while(!flag)
     {
         int totalPages = (TanList.NumNodes() + TanList.GetPageSize() - 1) / TanList.GetPageSize();
-        std::cout << "============================泰坦尼克号成员名单========================\n";
+        std::cout << "\n============================泰坦尼克号成员名单========================\n";
         std::cout << "                             【尊重死者R.I.P】                         \n";
         //输出前五个数据
         std::cout << "[当前页码：" << TanList.GetCurrentPage() << " / " << totalPages << "]\n";
@@ -187,6 +187,7 @@ void TantanicTest()
         std::cout << "退出系统[q]\n";//quit
         char choice, choice2;
         std::cin >> choice;
+        system("cls");
         switch(choice)
         {
             case 's':
@@ -237,6 +238,10 @@ void TantanicTest()
                 int designatedPage;
                 std::cout << "[请输入要跳转到的页面]:" ;
                 std::cin >> designatedPage;
+                if(designatedPage > totalPages)
+                    designatedPage = totalPages;
+                else if(designatedPage < 1)
+                    designatedPage = 1;
                 CurPage = designatedPage;
                 TanList.SetCurrentPage(CurPage);
                 break;
