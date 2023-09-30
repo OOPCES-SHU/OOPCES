@@ -12,6 +12,7 @@ public:
     friend std::ostream &operator<<(std::ostream &os, const Tantanic &tan);
     std::string GetName() const;
     bool GetSurvived() const;
+    int GetId() const;
 private:
     int PassengerId;
     bool Survived;

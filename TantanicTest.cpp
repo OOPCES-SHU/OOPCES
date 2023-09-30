@@ -11,6 +11,7 @@ static void TestAppend(LinkList<Tantanic > &tan)
 {
     Tantanic TanObj;
     std::string buf;
+    int CurNode = tan.CurPos();
     //吸取
     std::string temp;
     std::cout << "请输入要添加的数据，以回车结束:\n";
@@ -20,8 +21,15 @@ static void TestAppend(LinkList<Tantanic > &tan)
     std::getline(std::cin, temp);
     std::getline(std::cin, buf);
     TanObj.Set(buf+'\n');
-    tan.Append(TanObj);
-    std::cout << "添加成功\n";
+    if(tan.Go(TanObj.GetId()) == nullptr)
+    {
+        tan.Append(TanObj);
+        std::cout << "添加成功\n";
+    }
+    else{
+        std::cout << "添加失败,已有该id\n";
+    }
+    tan.Go(CurNode);
 }
 
 static void TestDelete(LinkList<Tantanic > &tan)
@@ -105,15 +113,26 @@ static void TestFind(char choice2, LinkList<Tantanic > &TanList)
             std::cout << "请输入要查找的PassengerId:";
             int PassengerId;
             std::cin >> PassengerId;
-            if((TanList.NumNodes() < PassengerId) || (PassengerId<=0))
+            if(std::cin.good())
             {
-                std::cout << "输入错误\n";
-                return;
+                if((TanList.NumNodes() < PassengerId) || (PassengerId<=0))
+                {
+                    std::cout << "输入错误\n";
+                    return;
+                }
+                else {
+                    TanList.Go(PassengerId - 1);
+                    std::cout << '\n' << TanList.CurData() << '\n';
+                    std::cout << "等待下一次输入.......按任意键继续\n";
+                    system("pause");
+                    break;
+                }
             }
-            else {
-                TanList.Go(PassengerId - 1);
-                std::cout << '\n' << TanList.CurData() << '\n';
-                std::cout << "等待下一次输入.......按任意键继续\n";
+            else
+            {
+                std::cout << "请输入整数！\n";
+                std::cin.clear();
+                std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' ); // 清除错误行
                 system("pause");
                 break;
             }
@@ -141,6 +160,7 @@ static void TestFind(char choice2, LinkList<Tantanic > &TanList)
             std::cout << "输入错误\n";
             std::cout << "等待下一次输入.......按任意键继续\n";
             system("pause");
+            std::cin.clear();
             break;
     }
 }
@@ -235,16 +255,28 @@ void TantanicTest()
                 }
                 break;
             case 'e':
+            {
                 int designatedPage;
                 std::cout << "[请输入要跳转到的页面]:" ;
                 std::cin >> designatedPage;
-                if(designatedPage > totalPages)
-                    designatedPage = totalPages;
-                else if(designatedPage < 1)
-                    designatedPage = 1;
-                CurPage = designatedPage;
-                TanList.SetCurrentPage(CurPage);
-                break;
+                if(std::cin.good())
+                {
+                    if (designatedPage > totalPages)
+                        designatedPage = totalPages;
+                    else if (designatedPage < 1)
+                        designatedPage = 1;
+                    CurPage = designatedPage;
+                    TanList.SetCurrentPage(CurPage);
+                    break;
+                }
+                else {
+                    std::cout << "请输入整数！\n";
+                    std::cin.clear();
+                    std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' ); // 清除错误行
+                    system("pause");
+                    break;
+                }
+            }
             case 'q':
                 flag = true;
                 std::cout << "退出系统\n";

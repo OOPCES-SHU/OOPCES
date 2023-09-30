@@ -114,6 +114,11 @@ bool Tantanic::GetSurvived() const
     return Survived;
 }
 
+int Tantanic::GetId() const
+{
+    return PassengerId;
+}
+
 std::ostream &operator<<(std::ostream &os, const Tantanic &tan)
 {
     /*
