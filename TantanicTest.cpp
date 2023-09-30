@@ -196,7 +196,6 @@ void TantanicTest()
         TanList.displayDataPage();
 
         std::cout << "============================对成员名单进行操作========================\n";
-        std::cout << "请输入要进行的操作:\n";
         std::cout << "输出所有数据[s]    "; //show //每个选项后面四个空格
         std::cout << "添加新的数据[a]    "; //add
         std::cout << "删除数据[d]    ";//delete
@@ -205,8 +204,11 @@ void TantanicTest()
         std::cout << "下一页[n]    "; // next page
         std::cout << "跳转到指定页面[e]    "; // designated page
         std::cout << "退出系统[q]\n";//quit
+        std::cout << "请输入要进行的操作:\n";
         char choice, choice2;
+        std::cin.clear();
         std::cin >> choice;
+        std::cin.sync();
         system("cls");
         switch(choice)
         {
