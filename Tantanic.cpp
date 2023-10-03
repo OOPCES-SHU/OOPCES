@@ -141,3 +141,101 @@ std::ostream &operator<<(std::ostream &os, const Tantanic &tan)
     os << tan.AllDataVec.at(22); //换行
     return os;
 }
+
+bool Tantanic::operator<(const Tantanic &tan) const
+{
+    return PassengerId < tan.PassengerId;
+}
+
+bool Tantanic::operator>(const Tantanic &tan) const
+{
+    return PassengerId > tan.PassengerId;
+}
+
+bool Tantanic::operator==(const Tantanic &tan) const
+{
+    return PassengerId == tan.PassengerId;
+}
+
+bool Tantanic::operator!=(const Tantanic &tan) const
+{
+    return PassengerId != tan.PassengerId;
+}
+
+bool Tantanic::operator<=(const Tantanic &tan) const
+{
+    return PassengerId <= tan.PassengerId;
+}
+
+bool Tantanic::operator>=(const Tantanic &tan) const
+{
+    return PassengerId >= tan.PassengerId;
+}
+
+
+void Tantanic::SetId(const std::string &id)
+{
+    AllDataVec.at(0) = id;
+    PassengerId = std::stoi(id);
+}
+
+void Tantanic::SetSurvived(const std::string &survived)
+{
+    AllDataVec.at(1) = survived;
+    Survived = (survived == "1");
+}
+
+void Tantanic::SetPclass(const std::string &pclass)
+{
+    AllDataVec.at(2) = pclass;
+    Pclass = std::stoi(pclass);
+}
+
+void Tantanic::SetName(const std::string &name)
+{
+    AllDataVec.at(3) = name;
+    Name = name;
+}
+
+void Tantanic::SetSex(const std::string &sex)
+{
+    AllDataVec.at(4) = sex;
+    Sex = std::stoi(sex);
+}
+
+void Tantanic::SetAge(const std::string &age)
+{
+    AllDataVec.at(5) = age;
+    Age = std::stoi(age);
+}
+
+void Tantanic::SetSibSp(const std::string &sibSp)
+{
+    AllDataVec.at(6) = sibSp;
+    SibSp = std::stoi(sibSp);
+}
+
+void Tantanic::SetParch(const std::string &parch)
+{
+    AllDataVec.at(7) = parch;
+    Parch = std::stoi(parch);
+}
+
+void Tantanic::SetTicket(const std::string &ticket)
+{
+    AllDataVec.at(8) = ticket;
+    Ticket = ticket;
+}
+
+void Tantanic::SetFare(const std::string &fare)
+{
+    AllDataVec.at(9) = fare;
+    Fare = std::stod(fare);
+}
+
+void Tantanic::SetEmbarked(const std::string &embarked)
+{
+    AllDataVec.at(10) = embarked;
+    Embarked = std::stoi(embarked);
+}
+

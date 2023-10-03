@@ -10,9 +10,27 @@ public:
     Tantanic();
     void Set(const std::string &str);
     friend std::ostream &operator<<(std::ostream &os, const Tantanic &tan);
-    std::string GetName() const;
-    bool GetSurvived() const;
+    bool operator<(const Tantanic &tan) const;
+    bool operator>(const Tantanic &tan) const;
+    bool operator==(const Tantanic &tan) const;
+    bool operator!=(const Tantanic &tan) const;
+    bool operator<=(const Tantanic &tan) const;
+    bool operator>=(const Tantanic &tan) const;
+
     int GetId() const;
+    void SetId(const std::string &id);
+    bool GetSurvived() const;
+    void SetSurvived(const std::string &survived);
+    void SetPclass(const std::string &pclass);
+    std::string GetName() const;
+    void SetName(const std::string &name);
+    void SetSex(const std::string &sex);
+    void SetAge(const std::string &age);
+    void SetSibSp(const std::string &sibSp);
+    void SetParch(const std::string &parch);
+    void SetTicket(const std::string &ticket);
+    void SetFare(const std::string &fare);
+    void SetEmbarked(const std::string &embarked);
 private:
     int PassengerId;
     bool Survived;

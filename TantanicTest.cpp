@@ -5,31 +5,62 @@
 #include <fstream>
 #include <bits/stdc++.h>
 
+static bool is_number(const std::string& s)
+{
+    std::string::const_iterator it = s.begin();
+    while (it != s.end() && std::isdigit(*it)) ++it;
+    return !s.empty() && it == s.end();
+}
+
+
+static bool inputtest(const std::string& str, char split)
+{
+    if (str == "")		return false;
+    int sum=0;
+    //在字符串末尾也加入分隔符，方便截取最后一段
+    std::string strs = str + split;
+    size_t pos = strs.find(split);
+    // 若找不到内容则字符串搜索函数返回 npos
+    while (pos != strs.npos)
+    {
+        std::string temp = strs.substr(0, pos);
+        strs = strs.substr(pos + 1, strs.size());
+        pos = strs.find(split);
+        sum++;
+    }
+    if(sum==11) return true;
+    else return false;
+}
 //增删该查
 
-static void TestAppend(LinkList<Tantanic > &tan)
+static void TestAppend(LinkList<Tantanic> &tan)
 {
     Tantanic TanObj;
     std::string buf;
     int CurNode = tan.CurPos();
-    //吸取
-    std::string temp;
     std::cout << "请输入要添加的数据，以回车结束:\n";
     std::cout << "输入顺序为PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Embarked\n";
     std::cout << "即乘客id,是否存活,乘客等级,乘客姓名,乘客性别,年龄,同代直系亲属数量,不同代直系亲属数量,票的类型,费用,几号港口\n";
     std::cout << "[每个数据之间用逗号隔开]\n[其中1代表存活,0代表死亡,1代表女性,0代表男性,0,1,2分别代表S,C,Q港口]\n";
-    std::getline(std::cin, temp);
     std::getline(std::cin, buf);
-    TanObj.Set(buf+'\n');
-    if(tan.Go(TanObj.GetId()) == nullptr)
+    std::string test=buf;
+    if(inputtest(test,','))
     {
-        tan.Append(TanObj);
-        std::cout << "添加成功\n";
+        TanObj.Set(buf+'\n');
+        if(tan.Go(TanObj.GetId()) == nullptr)
+        {
+            tan.Append(TanObj);
+            std::cout << "添加成功\n";
+        }
+        else{
+            std::cout << "添加失败,已有该id\n";
+        }
+        tan.Go(CurNode);
     }
-    else{
-        std::cout << "添加失败,已有该id\n";
+    else
+    {
+        std::cout<<"输入的数据个数有误，请检查后重新输入\n";
     }
-    tan.Go(CurNode);
 }
 
 static void TestDelete(LinkList<Tantanic > &tan)
@@ -165,6 +196,284 @@ static void TestFind(char choice2, LinkList<Tantanic > &TanList)
     }
 }
 
+static void TestEditor(LinkList<Tantanic > &tan)
+{
+    std::cout << "请输入要修改的乘客的Id:";
+    int CurNode = tan.CurPos(); //记录当前位置
+    int PassengerId;
+    bool flag{false};
+    std::cin.clear();
+    std::cin >> PassengerId;
+    std::cin.sync();
+    if(std::cin.good())
+    {
+        if((tan.NumNodes() < PassengerId) || (PassengerId<=0))
+        {
+            std::cout << "不存在该Id!\n";
+            return;
+        }
+        else {
+            tan.Go(PassengerId - 1);
+            while(!flag) {
+                system("cls");
+                std::cout << "请选择要修改的内容:\n";
+                std::cout << "[i]乘客id [s]是否存活 [p]乘客等级 [n]乘客姓名 \n"
+                          << "[x]乘客性别 [a]年龄 [b]同代直系亲属数量 "
+                          << "[r]不同代直系亲属数量 [t]票的类型 [f]费用 "
+                          <<  "[e]几号港口 [q]退出修改\n";
+                std::cout << "\n[其中1代表存活,0代表死亡,1代表女性,0代表男性,0,1,2分别代表S,C,Q港口]\n";
+                char choice3;
+                std::cin >> choice3;
+                switch (choice3) {
+                    case 'i': {
+                        std::cout << "请输入新的乘客id:";
+                        std::string NewPassengerId;
+                        std::cin >> NewPassengerId;
+                        if (is_number(NewPassengerId)) {
+                            tan.CurData().SetId(NewPassengerId);
+                            tan.Go(CurNode);
+                            Tantanic tem;
+                            tan.Sort(tem, true);
+                            std::cout << "修改成功\n";
+                            std::cout << "等待下一次输入.......按任意键继续\n";
+                            system("pause");
+                            break;
+                        } else {
+                            std::cout << "请输入整数！\n";
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 清除错误行
+                            system("pause");
+                            break;
+                        }
+                    }
+                    case 's': {
+                        std::cout << "请输入新的存活状态:\n";
+                        std::cout << "[1] 存活    ";
+                        std::cout << "[0] 死亡    \n";
+                        std::string NewSurvived;
+                        std::cin >> NewSurvived;
+                        if (is_number(NewSurvived)) {
+                            tan.CurData().SetSurvived(NewSurvived);
+                            std::cout << "修改成功\n";
+                            std::cout << "等待下一次输入.......按任意键继续\n";
+                            system("pause");
+                            break;
+                        } else {
+                            std::cout << "请输入整数！\n";
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 清除错误行
+                            system("pause");
+                            break;
+                        }
+                    }
+                    case 'p': {
+                        std::cout << "请输入新的乘客等级:\n";
+                        std::cout << "[1] 低    ";
+                        std::cout << "[2] 中    ";
+                        std::cout << "[3] 高    \n";
+                        std::string NewPclass;
+                        std::cin >> NewPclass;
+                        if (is_number(NewPclass)) {
+                            tan.CurData().SetPclass(NewPclass);
+                            std::cout << "修改成功\n";
+                            std::cout << "等待下一次输入.......按任意键继续\n";
+                            system("pause");
+                            break;
+                        } else {
+                            std::cout << "请输入整数！\n";
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 清除错误行
+                            system("pause");
+                            break;
+                        }
+                    }
+                    case 'n': {
+                            std::cout << "请输入新的乘客姓名:";
+                            std::string NewName;
+                            std::cin >> NewName;
+                            tan.CurData().SetName(NewName);
+                            std::cout << "修改成功\n";
+                            std::cout << "等待下一次输入.......按任意键继续\n";
+                            system("pause");
+                            break;
+                    }
+                    case 'x': {
+                        std::cout << "请输入新的乘客性别:\n";
+                        std::cout << "[1] 女性    ";
+                        std::cout << "[0] 男性    \n";
+                        std::string NewSex;
+                        std::cin >> NewSex;
+                        if (is_number(NewSex)) {
+                            tan.CurData().SetSex(NewSex);
+                            std::cout << "修改成功\n";
+                            std::cout << "等待下一次输入.......按任意键继续\n";
+                            system("pause");
+                            break;
+                        } else {
+                            std::cout << "请输入整数！\n";
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 清除错误行
+                            system("pause");
+                            break;
+                        }
+
+                    }
+                    case 'a': {
+                        std::cout << "请输入新的年龄:";
+                        std::string NewAge;
+                        std::cin >> NewAge;
+                        if (is_number(NewAge)) {
+                            tan.CurData().SetAge(NewAge);
+                            std::cout << "修改成功\n";
+                            std::cout << "等待下一次输入.......按任意键继续\n";
+                            system("pause");
+                            break;
+                        } else {
+                            std::cout << "请输入整数！\n";
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 清除错误行
+                            system("pause");
+                            break;
+                        }
+                    }
+                    case 'b': {
+                        std::cout << "请输入新的同代直系亲属数量:";
+                        std::string NewSibSp;
+                        std::cin >> NewSibSp;
+                        if (is_number(NewSibSp)) {
+                            tan.CurData().SetSibSp(NewSibSp);
+                            std::cout << "修改成功\n";
+                            std::cout << "等待下一次输入.......按任意键继续\n";
+                            system("pause");
+                            break;
+                        } else {
+                            std::cout << "请输入整数！\n";
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 清除错误行
+                            system("pause");
+                            break;
+                        }
+                    }
+                    case 'r': {
+                        std::cout << "请输入新的不同代直系亲属数量:";
+                        std::string NewParch;
+                        std::cin >> NewParch;
+                        if (is_number(NewParch)) {
+                            tan.CurData().SetParch(NewParch);
+                            std::cout << "修改成功\n";
+                            std::cout << "等待下一次输入.......按任意键继续\n";
+                            system("pause");
+                            break;
+                        } else {
+                            std::cout << "请输入整数！\n";
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 清除错误行
+                            system("pause");
+                            break;
+                        }
+                    }
+                    case 't': {
+                        std::cout << "请输入新的票的类型:\n";
+                        std::string NewTicket;
+                        std::cin >> NewTicket;
+                        tan.CurData().SetTicket(NewTicket);
+                        std::cout << "修改成功\n";
+                        std::cout << "等待下一次输入.......按任意键继续\n";
+                        system("pause");
+                        break;
+                    }
+                    case 'f': {
+                        void Stringsplit(const std::string &str,const char split, std::vector<std::string> &res);
+                        std::cout << "请输入新的费用:";
+                        std::vector<std::string > temp(2, "0");
+                        std::string NewFare;
+                        std::cin >> NewFare;
+                        Stringsplit(NewFare, '.', temp);
+                        if (is_number(temp[0]) && is_number(temp[1])) {
+                            tan.CurData().SetFare(NewFare);
+                            std::cout << "修改成功\n";
+                            std::cout << "等待下一次输入.......按任意键继续\n";
+                            system("pause");
+                            break;
+                        } else {
+                            std::cout << "请输入数字！\n";
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 清除错误行
+                            system("pause");
+                            break;
+                        }
+                    }
+                    case 'e': {
+                        std::cout << "请输入新的几号港口:\n";
+                        std::cout << "[1] S    ";
+                        std::cout << "[2] C    ";
+                        std::cout << "[3] Q    \n";
+                        std::string NewEmbarked;
+                        std::cin >> NewEmbarked;
+                        if (is_number(NewEmbarked)) {
+                            tan.CurData().SetEmbarked(NewEmbarked);
+                            std::cout << "修改成功\n";
+                            std::cout << "等待下一次输入.......按任意键继续\n";
+                            system("pause");
+                            break;
+                        } else {
+                            std::cout << "请输入整数！\n";
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 清除错误行
+                            system("pause");
+                            break;
+                        }
+                    }
+                    case 'q': {
+                        flag = true;
+                        std::cout << "退出修改\n";
+                        break;
+                    }
+                    default: {
+                        std::cout << "输入错误，请重新输入\n";
+                        std::cout << "等待下一次输入.......按任意键继续\n";
+                        system("pause");
+                        break;
+                    }
+                }
+            }
+            tan.Go(CurNode);
+            std::cout << "等待下一次输入.......按任意键继续\n";
+            system("pause");
+        }
+    }
+    else
+    {
+        std::cout << "请输入整数！\n";
+        std::cin.clear();
+        std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' ); // 清除错误行
+        system("pause");
+    }
+}
+
+static void TestSort(LinkList<Tantanic > &tan)
+{
+    //将tan中的数据按照id从小到大排序
+//    int CurNode = tan.CurPos(); //记录当前位置
+    std::cout << "请选择排序方式(只以Id进行排序):\n"
+              << "[1]升序 "
+              << "[0]降序\n";
+    bool ascending{true};
+    std::cin.clear();
+    std::cin >> ascending;
+    std::cin.sync();
+    if(std::cin.good())
+    {
+        Tantanic x;
+        tan.Sort(x, ascending);
+        std::cout << "排序成功\n";
+    } else
+    {
+        std::cout << "输入错误\n";
+    }
+//    tan.Go(CurNode);
+}
+
 //PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Embarked
 void TantanicTest()
 {
@@ -203,8 +512,10 @@ void TantanicTest()
         std::cout << "上一页[p]    "; // previous page
         std::cout << "下一页[n]    "; // next page
         std::cout << "跳转到指定页面[e]    "; // designated page
+        std::cout << "修改数据[m]    ";//modify
+        std::cout << "按id排序[o]\n";//order
         std::cout << "退出系统[q]\n";//quit
-        std::cout << "请输入要进行的操作:\n";
+        std::cout << "请输入要进行的操作:";
         char choice, choice2;
         std::cin.clear();
         std::cin >> choice;
@@ -279,6 +590,15 @@ void TantanicTest()
                     break;
                 }
             }
+            case 'm':
+                TestEditor(TanList);
+                break;
+            case 'o':
+
+                TestSort(TanList);
+                std::cout << "等待下一次输入.......按任意键继续\n";
+                system("pause");
+                break;
             case 'q':
                 flag = true;
                 std::cout << "退出系统\n";
