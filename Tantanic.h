@@ -31,6 +31,8 @@ public:
     void SetTicket(const std::string &ticket);
     void SetFare(const std::string &fare);
     void SetEmbarked(const std::string &embarked);
+    std::string GetAllDataStr() const;
+    std::vector<std::string> GetAllDataVec() const;
 private:
     int PassengerId;
     bool Survived;

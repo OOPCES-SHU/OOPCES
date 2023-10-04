@@ -35,7 +35,7 @@ public:
     int NumNodes() const;						// 返回结点数
     int CurPos() const;							// 返回当前结点的序号（-1表示无当前结点）
     Node<T> *CurNode();							// 返回当前结点的地址（nullptr表示无当前结点）
-    T & CurData();					// 引用返回当前结点数据域成员，函数调用表达式可做左值
+    T  CurData();					// 引用返回当前结点数据域成员，函数调用表达式可做左值
 
     Node<T> *GoTop(), *Go(int n), *GoBottom();	// 当前结点绝对定位：首结点、第n个结点(n从0起)、尾结点
     Node<T> *Skip(int n=1) ;			// 当前结点相对定位（n可为负数），默认n为1表示下一个结点
@@ -258,7 +258,7 @@ T LinkList<T>::DeleteCurNode() 		// 删除当前结点，其下一个结点（�
     try {
         if (cur_node == nullptr || head == nullptr) throw true;
     }
-    catch(bool) { std::cerr <<"[链表为空，无法删除!]\n";}
+    catch(bool) { T error;std::cerr <<"[链表为空，无法删除!]\n";return error;}
     Node<T> *p;
     T x;
     if(cur_node == head)
@@ -319,12 +319,12 @@ Node<T> *LinkList<T>::CurNode()					// 返回当前结点的地址（nullptr表�
 }
 
 template <typename T>
-T & LinkList<T>::CurData()			// 引用返回当前结点数据域成员，函数调用表达式可做左值
+T  LinkList<T>::CurData()			// 引用返回当前结点数据域成员，函数调用表达式可做左值
 {
     try{
         if(cur_node == nullptr) throw true;
     }
-    catch (bool) { std::cerr << "[链表为空，无法返回数据!]\n"; }
+    catch (bool) { T error;std::cerr << "[链表为空，无法返回数据!]\n"; return error;}
     if(cur_node!=nullptr)
         return cur_node->data;
 }
