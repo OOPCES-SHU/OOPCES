@@ -36,6 +36,7 @@ static bool inputtest(const std::string& str, char split)
 static void TestAppend(LinkList<Tantanic> &tan)
 {
     Tantanic TanObj;
+    Tantanic temp;
     std::string buf;
     int CurNode = tan.CurPos();
     std::cout << "请输入要添加的数据，以回车结束:\n";
@@ -43,19 +44,22 @@ static void TestAppend(LinkList<Tantanic> &tan)
     std::cout << "即乘客id,是否存活,乘客等级,乘客姓名,乘客性别,年龄,同代直系亲属数量,不同代直系亲属数量,票的类型,费用,几号港口\n";
     std::cout << "[每个数据之间用逗号隔开]\n[其中1代表存活,0代表死亡,1代表女性,0代表男性,0,1,2分别代表S,C,Q港口]\n";
     std::getline(std::cin, buf);
-    std::string test=buf;
-    if(inputtest(test,','))
+    if(inputtest(buf,','))
     {
         TanObj.Set(buf+'\n');
-        if(tan.Go(TanObj.GetId()) == nullptr)
+        if(is_number(TanObj.GetAllDataVec().at(0)))
         {
-            tan.Append(TanObj);
-            std::cout << "添加成功\n";
+            temp.Set(TanObj.GetAllDataVec().at(0)+",0,0,0,0,0,0,0,0,0,1");
+            if(tan.Locate(temp, true) == nullptr)
+            {
+                tan.Append(TanObj);
+                std::cout << "添加成功\n";
+            }
+            else{
+                std::cout << "添加失败,已有该id\n";
+            }
+            tan.Go(CurNode);
         }
-        else{
-            std::cout << "添加失败,已有该id\n";
-        }
-        tan.Go(CurNode);
     }
     else
     {
@@ -65,19 +69,16 @@ static void TestAppend(LinkList<Tantanic> &tan)
 
 static void TestDelete(LinkList<Tantanic > &tan)
 {
-    int PassengerId;
+    std::string PassengerId;
+    Tantanic TanObj;
+    int CurNode = tan.CurPos();
     std::cout << "请输入要删除的数据的PassengerId:";
     std::cin >> PassengerId;
-    if((tan.NumNodes() < PassengerId) || (PassengerId<=0))
-    {
-        std::cout << "输入错误\n";
-        return;
-    }
-    else {
-        tan.Go(PassengerId-1);
-        tan.DeleteCurNode();
-        std::cout << "删除成功\n" << '\n';
-    }
+    TanObj.Set(PassengerId+",0,0,0,0,0,0,0,0,0,1");
+    tan.Locate(TanObj, true);
+    if(tan.DeleteCurNode().GetAllDataStr() == "unknown" ) std::cout << "删除失败\n";
+    else std::cout << "删除成功\n";
+    tan.Go(CurNode+1);
 }
 
 static void Search(const std::string &x ,LinkList<Tantanic >& tan)   //根据姓名模糊搜索
@@ -141,32 +142,19 @@ static void TestFind(char choice2, LinkList<Tantanic > &TanList)
     switch(choice2)
     {
         case '1':
+        {
             std::cout << "请输入要查找的PassengerId:";
-            int PassengerId;
+            std::string PassengerId;
             std::cin >> PassengerId;
-            if(std::cin.good())
-            {
-                if((TanList.NumNodes() < PassengerId) || (PassengerId<=0))
-                {
-                    std::cout << "输入错误\n";
-                    return;
-                }
-                else {
-                    TanList.Go(PassengerId - 1);
-                    std::cout << '\n' << TanList.CurData() << '\n';
-                    std::cout << "等待下一次输入.......按任意键继续\n";
-                    system("pause");
-                    break;
-                }
-            }
-            else
-            {
-                std::cout << "请输入整数！\n";
-                std::cin.clear();
-                std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' ); // 清除错误行
-                system("pause");
-                break;
-            }
+            Tantanic temp;
+            temp.Set(PassengerId+",0,0,0,0,0,0,0,0,0,1");
+            TanList.Locate(temp, true);
+            if(TanList.CurData().GetAllDataStr() == "unknown") std::cout << "未找到相关信息\n";
+            else std::cout << '\n' << TanList.CurData() << '\n';
+            std::cout << "等待下一次输入.......按任意键继续\n";
+            system("pause");
+            break;
+        }
         case '2':
             std::cout << "请输入要查找的姓名:";
             std::cin >> name;

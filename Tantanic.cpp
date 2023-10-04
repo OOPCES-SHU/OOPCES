@@ -54,9 +54,16 @@ Tantanic::Tantanic()
 
 void Tantanic::Set(const std::string &str)
 {
+    bool is_number(const std::string& s);
     AllDataStr = str;
     Stringsplit(AllDataStr, ",", AllDataVec);
-    PassengerId = std::stoi(AllDataVec[0]);
+    if(is_number(AllDataVec[0]) )
+        PassengerId = std::stoi(AllDataVec[0]);
+    else
+    {
+        PassengerId = -1;
+        std::cout << "Id请输入数字!\n";
+    }
     Survived = (AllDataVec[1] == "1");
     Pclass = std::stoi(AllDataVec[2]);
     Name = AllDataVec[3];
@@ -239,3 +246,12 @@ void Tantanic::SetEmbarked(const std::string &embarked)
     Embarked = std::stoi(embarked);
 }
 
+std::string Tantanic::GetAllDataStr() const
+{
+    return AllDataStr;
+}
+
+std::vector<std::string> Tantanic::GetAllDataVec() const
+{
+    return AllDataVec;
+}
