@@ -76,7 +76,7 @@ static void TestDelete(LinkList<Tantanic > &tan)
     std::cin >> PassengerId;
     TanObj.Set(PassengerId+",0,0,0,0,0,0,0,0,0,1");
     tan.Locate(TanObj, true);
-    if(tan.DeleteCurNode().GetAllDataStr() == "unknown" ) std::cout << "删除失败\n";
+    if(tan.DeleteCurNode().GetAllDataStr() == "unknown" ) std::cout << "Id不存在，删除失败\n";
     else std::cout << "删除成功\n";
     tan.Go(CurNode+1);
 }
@@ -186,22 +186,37 @@ static void TestFind(char choice2, LinkList<Tantanic > &TanList)
 
 static void TestEditor(LinkList<Tantanic > &tan)
 {
+    Tantanic TanObj;
     std::cout << "请输入要修改的乘客的Id:";
     int CurNode = tan.CurPos(); //记录当前位置
-    int PassengerId;
+    std::string PassengerId;
     bool flag{false};
     std::cin.clear();
     std::cin >> PassengerId;
     std::cin.sync();
     if(std::cin.good())
     {
-        if((tan.NumNodes() < PassengerId) || (PassengerId<=0))
-        {
-            std::cout << "不存在该Id!\n";
-            return;
-        }
-        else {
-            tan.Go(PassengerId - 1);
+//
+//        std::cout << "请输入要查找的PassengerId:";
+//        std::string PassengerId;
+//        std::cin >> PassengerId;
+//        Tantanic temp;
+//        temp.Set(PassengerId+",0,0,0,0,0,0,0,0,0,1");
+//        TanList.Locate(temp, true);
+//        if(TanList.CurData().GetAllDataStr() == "unknown") std::cout << "未找到相关信息\n";
+//        else std::cout << '\n' << TanList.CurData() << '\n';
+//        std::cout << "等待下一次输入.......按任意键继续\n";
+//        system("pause");
+//        break;
+
+
+            TanObj.Set(PassengerId+",0,0,0,0,0,0,0,0,0,1");
+            tan.Locate(TanObj, true);
+            if(tan.CurData().GetAllDataStr() == "unknown")
+            {
+                std::cout << "Id不存在，修改失败\n";
+                return;
+            }
             while(!flag) {
                 system("cls");
                 std::cout << "请选择要修改的内容:\n";
@@ -219,7 +234,7 @@ static void TestEditor(LinkList<Tantanic > &tan)
                         std::cin >> NewPassengerId;
                         if (is_number(NewPassengerId)) {
                             tan.CurData().SetId(NewPassengerId);
-                            tan.Go(CurNode);
+                            //tan.Go(CurNode);
                             Tantanic tem;
                             tan.Sort(tem, true);
                             std::cout << "修改成功\n";
@@ -428,7 +443,6 @@ static void TestEditor(LinkList<Tantanic > &tan)
             tan.Go(CurNode);
             std::cout << "等待下一次输入.......按任意键继续\n";
             system("pause");
-        }
     }
     else
     {
