@@ -211,8 +211,7 @@ static void TestEditor(LinkList<Tantanic > &tan)
 
 
             TanObj.Set(PassengerId+",0,0,0,0,0,0,0,0,0,1");
-            tan.Locate(TanObj, true);
-            if(tan.CurData().GetAllDataStr() == "unknown")
+            if(tan.Locate(TanObj, true) == nullptr)
             {
                 std::cout << "Id不存在，修改失败\n";
                 return;

@@ -246,7 +246,7 @@ void Tantanic::SetEmbarked(const std::string &embarked)
     Embarked = std::stoi(embarked);
 }
 
-std::string Tantanic::GetAllDataStr() const
+std::string Tantanic::GetAllDataStr()
 {
     return AllDataStr;
 }
