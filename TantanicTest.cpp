@@ -75,8 +75,12 @@ static void TestDelete(LinkList<Tantanic > &tan)
     std::cout << "请输入要删除的数据的PassengerId:";
     std::cin >> PassengerId;
     TanObj.Set(PassengerId+",0,0,0,0,0,0,0,0,0,1");
-    if(tan.Locate(TanObj, true)) std::cout << "Id不存在，删除失败\n";
-    else std::cout << "删除成功\n";
+    if( tan.Locate(TanObj, true)==nullptr ) std::cout << "Id不存在，删除失败\n";
+    else
+    {
+        tan.DeleteCurNode();
+        std::cout << "删除成功\n";
+    }
     tan.Go(CurNode+1);
 }
 
